@@ -1,0 +1,14 @@
+<div>
+  <button class="btn btn-primary" (click)="irAcrearContactos()">
+    Crear contacto
+  </button>
+
+  <app-tabla
+    [titulo]="titulo"
+    [columnas]="columnas"
+    [data]="contactos"
+    (onInformacion)="recibirInformacion($event)"
+    (onActualizar)="irAactualizarContacto($event)"
+    (onEliminar)="eliminarContacto($event)"
+  ></app-tabla>
+</div>

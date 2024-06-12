@@ -1,0 +1,39 @@
+<h2 class="text-center" appCrearFormulario>Contacto</h2>
+
+<form [formGroup]="contactoForm" (ngSubmit)="crearContacto()">
+  <div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" class="form-control" formControlName="nombre" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Apellido</label>
+    <input type="text" class="form-control" formControlName="apellido" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Número Celular</label>
+    <input type="tel" class="form-control" formControlName="numeroCelular" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Cargo</label>
+    <select class="form-select" formControlName="cargo">
+      <option value="">Seleccione un rol</option>
+      <option value="CLIENT">Cliente</option>
+      <option value="USER">Usuario</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label"> Contraseña</label>
+    <input type="password" class="form-control" formControlName="Password" />
+  </div>
+
+  <button class="btn btn-primary" type="submit" appCrearFormulario></button>
+</form>

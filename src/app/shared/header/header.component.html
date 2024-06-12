@@ -1,0 +1,53 @@
+<!-- *appCargo="['USER', 'ADMIN']" -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><img src="./assets/image/logo.png" width="30" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        @for (menu of menuItems; track $index) {
+        <li class="nav-item" [class]="menu.classCss">
+          <a class="nav-link" [routerLink]="menu.path"
+            ><i [class]="menu.icon"></i> {{ menu.title }}</a
+          >
+        </li>
+        @if (menu.submenu?.length !== 0) {
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          </a>
+          <ul class="dropdown-menu">
+            @for (subMenu of menu.submenu; track $index) {
+            <li class="dropdown-item" [class]="subMenu.classCss">
+              <a [routerLink]="subMenu.path"
+                ><i [class]="subMenu.icon"></i> {{ subMenu.title }}</a
+              >
+            </li>
+            }
+          </ul>
+        </li>
+        } }
+      </ul>
+    </div>
+    <button class="btn btn-primary" (click)="cerrarSesion()">
+      Cerrar Sesión
+    </button>
+  </div>
+</nav>
