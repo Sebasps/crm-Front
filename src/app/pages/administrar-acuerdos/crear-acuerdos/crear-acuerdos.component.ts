@@ -10,9 +10,10 @@ import { AcuerdoModel } from '../../../core/models/acuerdo.model';
 import { AcuerdosService } from '../../../services/acuerdos/acuerdos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AcuerdoInterface } from '../../../core/interfaces/acuerdi.interface';
+import { AcuerdoInterface } from '../../../core/interfaces/acuerdo.interface';
 import { PATH } from '../../../core/enum/path.enum';
 import { CrearFormularioDirective } from '../../../core/directives/crear-formulario/crear-formulario.directive';
+import { ContactoModel } from '../../../core/models/contacto.model';
 
 @Component({
   selector: 'app-crear-acuerdos',
@@ -23,17 +24,27 @@ import { CrearFormularioDirective } from '../../../core/directives/crear-formula
 })
 export class CrearAcuerdosComponent implements OnInit, OnDestroy {
   acuerdoForm: FormGroup;
+  isAcuerdo: boolean = false;
   acuerdoSubscription: Subscription;
   acuerdoSeleccionado: AcuerdoModel;
+  contactos: ContactoModel[] = [];
 
   private formBuilder = inject(FormBuilder);
   private acuerdosService = inject(AcuerdosService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
 
+  get formAcuerdo() {
+    return this.acuerdoForm.controls;
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(({ id }) => {
       this.buscarAcuerdo(id);
+    });
+
+    this.activatedRoute.params.subscribe(({ contactos }) => {
+      this.contactos = contactos;
     });
 
     this.crearFormulario();
@@ -75,8 +86,10 @@ export class CrearAcuerdosComponent implements OnInit, OnDestroy {
   }
 
   crearAcuerdo() {
-    if (!this.acuerdoForm.valid) {
-      Swal.fire('Crear acuerdo', 'Por favor complete el formulario', 'info');
+    this.isAcuerdo = true;
+
+    if (this.acuerdoForm.invalid) {
+      return;
     }
 
     const data = this.acuerdoForm.value;
@@ -97,7 +110,7 @@ export class CrearAcuerdosComponent implements OnInit, OnDestroy {
             `El acuerdo con ${data.cliente} ha sido creado con exito`,
             'success'
           );
-          this.resetFormulario();
+          this.router.navigateByUrl(`${PATH.ACUERDOS}`);
         },
         error: (error) => {
           Swal.fire('Error', `${error.error.smg}`, 'error');
@@ -106,13 +119,13 @@ export class CrearAcuerdosComponent implements OnInit, OnDestroy {
     }
   }
 
-  actualizarAcuerdo(contacto: AcuerdoInterface) {
+  actualizarAcuerdo(acuerdo: AcuerdoInterface) {
     const acuerdoActualizar: AcuerdoModel = {
       _id: this.acuerdoSeleccionado._id,
-      descripcion: contacto.descripcion,
-      etapa: contacto.etapa,
-      usuario: contacto.usuario,
-      cliente: contacto.cliente,
+      descripcion: acuerdo.descripcion,
+      etapa: acuerdo.etapa,
+      usuario: acuerdo.usuario,
+      cliente: acuerdo.cliente,
     };
 
     this.acuerdosService.actualizarAcuerdo(acuerdoActualizar).subscribe({

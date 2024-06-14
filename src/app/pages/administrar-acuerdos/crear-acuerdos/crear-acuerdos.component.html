@@ -2,23 +2,37 @@
 
 <form [formGroup]="acuerdoForm" (ngSubmit)="crearAcuerdo()">
   <div class="mb-3">
-    <label class="form-label">Descripción</label>
+    <label class="form-label">Descripción *</label>
     <textarea class="form-control" formControlName="descripcion"></textarea>
+    @if (isAcuerdo && formAcuerdo['descripcion'].hasError('required')) {
+    <small class="text-danger"> La descripción es requerida </small>
+    }
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Etapa</label>
+    <label class="form-label">Etapa *</label>
     <input type="text" class="form-control" formControlName="etapa" />
+    @if (isAcuerdo && formAcuerdo['etapa'].hasError('required')) {
+    <small class="text-danger"> La etapa es requerida </small>
+    }
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Usuario</label>
-    <input type="email" class="form-control" formControlName="usuario" />
+    <label class="form-label">Usuario *</label>
+    <input type="text" class="form-control" formControlName="usuario" />
+    @if (isAcuerdo && formAcuerdo['usuario'].hasError('required')) {
+    <small class="text-danger"> El usuario es requerido </small>
+    }
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Cliente</label>
-    <input type="tel" class="form-control" formControlName="cliente" />
+    <label class="form-label">Cliente *</label>
+    <select class="form-select" formControlName="cliente">
+      <option value="" disabled>Seleccione un cliente</option>
+    </select>
+    @if (isAcuerdo && formAcuerdo['cliente'].hasError('required')) {
+    <small class="text-danger"> El cliente es requerido </small>
+    }
   </div>
 
   <button class="btn btn-primary" type="submit" appCrearFormulario></button>

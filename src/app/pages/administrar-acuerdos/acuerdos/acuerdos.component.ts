@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { TablaComponent } from '../../../components/tabla/tabla.component';
 import { AcuerdoModel } from '../../../core/models/acuerdo.model';
-import { AcuerdoInterface } from '../../../core/interfaces/acuerdi.interface';
+import { AcuerdoInterface } from '../../../core/interfaces/acuerdo.interface';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';

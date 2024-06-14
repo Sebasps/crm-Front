@@ -3,7 +3,7 @@ import { MenuInfoInterface } from '../core/interfaces/menu-info.interfase';
 
 export const MenuRoutes: MenuInfoInterface[] = [
   {
-    path: PATH.HOME,
+    path: PATH.INICIO,
     title: 'Home',
     icon: 'fa-solid fa-house',
     classCss: '',

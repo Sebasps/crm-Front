@@ -2,18 +2,30 @@
 
 <form [formGroup]="contactoForm" (ngSubmit)="crearContacto()">
   <div class="mb-3">
-    <label class="form-label">Nombre</label>
+    <label class="form-label">Nombre *</label>
     <input type="text" class="form-control" formControlName="nombre" />
+    @if (isContacto && formContacto['nombre'].hasError('required')) {
+    <small class="text-danger"> El nombre es requerido </small>
+    }
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Apellido</label>
+    <label class="form-label">Apellido *</label>
     <input type="text" class="form-control" formControlName="apellido" />
+    @if (isContacto && formContacto['apellido'].hasError('required')) {
+    <small class="text-danger"> El apellido es requerido </small>
+    }
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Email</label>
+    <label class="form-label">Correo electrónico *</label>
     <input type="email" class="form-control" formControlName="email" />
+    @if (isContacto && formContacto['email'].errors) {
+    <small class="text-danger"> El correo electrónico es requerido </small>
+    } @if ( formContacto['email'].hasError('email') &&
+    formContacto['email'].touched ) {
+    <small class="text-danger"> Debe ser un correo electrónico </small>
+    }
   </div>
 
   <div class="mb-3">
@@ -22,12 +34,15 @@
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Cargo</label>
+    <label class="form-label">Cargo *</label>
     <select class="form-select" formControlName="cargo">
-      <option value="">Seleccione un rol</option>
+      <option value="" disabled>Seleccione un rol</option>
       <option value="CLIENT">Cliente</option>
       <option value="USER">Usuario</option>
     </select>
+    @if (isContacto && formContacto['cargo'].hasError('required')) {
+    <small class="text-danger"> El cargo es requerido </small>
+    }
   </div>
 
   <div class="mb-3">

@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router';
 import { AcuerdoModel } from '../../core/models/acuerdo.model';
 import { HttpClient } from '@angular/common/http';
-import { AcuerdoInterface } from '../../core/interfaces/acuerdi.interface';
+import { AcuerdoInterface } from '../../core/interfaces/acuerdo.interface';
 
 const base_url = environment.base_url;
 @Injectable({

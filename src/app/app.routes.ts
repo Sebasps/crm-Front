@@ -44,6 +44,7 @@ export const routes: Routes = [
         path: `${PATH.CREAR_ACUERDOS}/:id`,
         title: 'Crear Acuerdos',
         component: CrearAcuerdosComponent,
+        resolve: { contactos: contactosResolver },
       },
     ],
   },

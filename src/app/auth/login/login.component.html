@@ -30,9 +30,9 @@
         placeholder="Contraseña"
       />
     </div>
-    @if (!!isLogin && formLogin['password'].hasError('required') ) {
-    <small class="text-danger"> El password es Obligarotio </small>
-    } @if (!!isLogin && formLogin['password'].hasError('minlength') ) {
+    @if (!!isLogin && formLogin['password'].hasError('required')) {
+    <small class="text-danger"> La contraseña es requerda </small>
+    } @if (!!isLogin && formLogin['password'].hasError('minlength')) {
     <small class="text-danger">
       La longitud de la contraseña debe ser mayor a 3 caracteres
     </small>

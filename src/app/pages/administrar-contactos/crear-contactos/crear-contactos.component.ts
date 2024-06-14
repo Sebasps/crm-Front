@@ -23,6 +23,7 @@ import { CrearFormularioDirective } from '../../../core/directives/crear-formula
 })
 export class CrearContactosComponent implements OnInit, OnDestroy {
   contactoForm: FormGroup;
+  isContacto: boolean = false;
   contactoSubscription: Subscription;
   contactoSeleccionado: ContactoModel;
 
@@ -30,6 +31,10 @@ export class CrearContactosComponent implements OnInit, OnDestroy {
   private contactosService = inject(ContactosService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
+
+  get formContacto() {
+    return this.contactoForm.controls;
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(({ id }) => {
@@ -79,8 +84,10 @@ export class CrearContactosComponent implements OnInit, OnDestroy {
   }
 
   crearContacto() {
-    if (!this.contactoForm.valid) {
-      Swal.fire('Crear contacto', 'Por favor complete el formulario', 'info');
+    this.isContacto = true;
+
+    if (this.contactoForm.invalid) {
+      return;
     }
 
     const data = this.contactoForm.value;
@@ -103,7 +110,7 @@ export class CrearContactosComponent implements OnInit, OnDestroy {
             `El contacto ${data.nombre} ha sido creado con exito`,
             'success'
           );
-          this.resetFormulario();
+          this.router.navigateByUrl(`${PATH.CONTACTOS}`);
         },
         error: (error) => {
           Swal.fire('Error', `${error.error.smg}`, 'error');
