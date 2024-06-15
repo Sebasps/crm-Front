@@ -110,7 +110,7 @@ export class CrearContactosComponent implements OnInit, OnDestroy {
             `El contacto ${data.nombre} ha sido creado con exito`,
             'success'
           );
-          this.router.navigateByUrl(`${PATH.CONTACTOS}`);
+          return this.router.navigateByUrl(`${PATH.CONTACTOS}`);
         },
         error: (error) => {
           Swal.fire('Error', `${error.error.smg}`, 'error');

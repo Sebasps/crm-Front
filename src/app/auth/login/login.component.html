@@ -31,7 +31,7 @@
       />
     </div>
     @if (!!isLogin && formLogin['password'].hasError('required')) {
-    <small class="text-danger"> La contraseña es requerda </small>
+    <small class="text-danger"> La contraseña es requerida </small>
     } @if (!!isLogin && formLogin['password'].hasError('minlength')) {
     <small class="text-danger">
       La longitud de la contraseña debe ser mayor a 3 caracteres
@@ -52,6 +52,7 @@
     <a href="" class="text-body">¿Has olvidado tu contraseña?</a>
   </div>
 
+  <p class="text-center">Datos de prueba: email&#64;test.com - 1234</p>
   <div class="text-lg-start mt-4 pt-2">
     <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
   </div>
